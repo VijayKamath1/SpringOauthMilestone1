@@ -34,9 +34,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+    public JwtAccessTokenConverter jwtAccessTokenConverter () {
         var converter = new JwtAccessTokenConverter();
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource(privatekey),password.toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource(privatekey), password.toCharArray());
 
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair(alias));
 
@@ -45,13 +45,13 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 
     @Bean
-    public TokenStore tokenStore() {
+    public TokenStore tokenStore () {
         return new JwtTokenStore(
                 jwtAccessTokenConverter());
     }
 
     @Override
-    public void configure( ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure ( ClientDetailsServiceConfigurer clients ) throws Exception {
         clients.inMemory()
                 .withClient("client1")
                 .secret("secret1")
@@ -69,10 +69,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
 
-
-     @Override
-    public void configure( AuthorizationServerEndpointsConfigurer endpoints){
+    @Override
+    public void configure ( AuthorizationServerEndpointsConfigurer endpoints ) {
         endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore()).accessTokenConverter(jwtAccessTokenConverter());
-     }
+    }
 
 }

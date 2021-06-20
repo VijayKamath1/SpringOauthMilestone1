@@ -20,7 +20,7 @@ public class AuthorizationTest {
     private MockMvc mvc;
 
     @Test
-    public void loginWithWrongAuthority() throws Exception {
+    public void loginWithWrongAuthority () throws Exception {
         mvc.perform(formLogin().user("Harry").password("12345"))
                 .andExpect(redirectedUrl("/"))
                 .andExpect(status().isFound())
@@ -29,7 +29,7 @@ public class AuthorizationTest {
 
 
     @Test
-    void generateTokenValidUserAndClientTest() throws Exception {
+    void generateTokenValidUserAndClientTest () throws Exception {
 
         mvc.perform(
                 post("/oauth/token")
@@ -41,9 +41,7 @@ public class AuthorizationTest {
         )
                 .andExpect(jsonPath("$.access_token").exists())
                 .andExpect(status().isOk());
-
     }
-
 
 
 }

@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebsecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public UserDetailsService userDetailService(){
+    public UserDetailsService userDetailService () {
         var userDetailService = new InMemoryUserDetailsManager();
 
         var u = User.withUsername("Harry").password("12345").authorities("read").build();
@@ -25,13 +25,12 @@ public class WebsecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder () {
         return NoOpPasswordEncoder.getInstance();
     }
 
-
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean () throws Exception {
         return super.authenticationManagerBean();
     }
 
